@@ -1,6 +1,6 @@
 import framework.*;
 
-public class MessageBox implements Product {
+public class MessageBox extends Product {
     private char decochar;
     public MessageBox(char decochar) {
         this.decochar = decochar;
@@ -16,14 +16,5 @@ public class MessageBox implements Product {
             System.out.print(decochar);
         }
         System.out.println("");
-    }
-    public Product createClone() {
-        Product p = null;
-        try {
-            p = (Product)clone();
-        } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-        }
-        return p;
     }
 }
