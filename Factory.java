@@ -1,11 +1,24 @@
-package framework;
+package factory;
 
 public abstract class Factory {
-    public final Product create(String owner) {
-        Product p = createProduct(owner);
-        registerProduct(p);
-        return p;
+    public static Factory getFactory(String classname) {
+        Factory factory = null;
+        try {
+            factory = (Factory)Class.forName(classname).newInstance();
+        } catch (ClassNotFoundException e) {
+            System.err.println("클래스" + classname + " 가 발견되지 않았습니다.");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return factory;
     }
-    protected abstract Product createProduct(String owner);
-    protected abstract void registerProduct(Product product);
+    public abstract Link createLink(String caption, String url);
+    public abstract Tray createTray(String caption);
+    public abstract Page createPage(String title, String author);
+    public Page createYahooPage() {                                     
+        Link link = createLink("Yahoo!", "http://www.yahoo.com/");      
+        Page page = createPage("Yahoo!", "Yahoo!");                     
+        page.add(link);                                                 
+        return page;                                                    
+    }                                                                   
 }
