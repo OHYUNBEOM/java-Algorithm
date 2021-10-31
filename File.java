@@ -11,7 +11,7 @@ public class File extends Entry {
     public int getSize() {
         return size;
     }
-    protected void printList(String prefix) {
-        System.out.println(prefix + "/" + this);
+    public void accept(Visitor v) {
+        v.visit(this);
     }
 }
